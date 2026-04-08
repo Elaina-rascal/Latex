@@ -21,9 +21,6 @@
 \setstretch{1.5}                           
 \setlength{\headheight}{15pt}              
 
-% 自定义 48 磅字号 (对应你要求的“课程设计说明书”字号)
-\newcommand{\sizefortyeight}{\fontsize{48pt}{\baselineskip}\selectfont}
-
 % --- 3. 章节标题样式定制 ---
 \titleformat{\chapter}[block]
   {\centering\zihao{-3}\bfseries\sffamily}
@@ -44,17 +41,14 @@
 \begin{document}
 
 % =========================================================
-% 修改后的封面部分
-% =========================================================
-% =========================================================
-% 修改后的封面部分
+% 封面部分
 % =========================================================
 \begin{titlepage}
     \centering
     \vspace*{1cm}
     
     % 1. 南京理工大学 Logo
-    % \includegraphics[width=0.8\textwidth]{njust_logo.png} \par
+    \includegraphics[width=0.8\textwidth]{njust_logo.png} \par
     
     \vspace{1.5cm}
     
@@ -66,8 +60,7 @@
     % 3. 姓名学号等
     % 外部统一设为三号字 (\zihao{3})
     {\zihao{3} 
-    \begin{tabular}{l c} % l 为左对齐标签，c 为居中内容
-        % \bfseries 仅作用于标签部分，内容部分用 \normalfont 恢复不加粗状态
+    \begin{tabular}{l c}
         \bfseries 姓\quad\quad 名： & \underline{\makebox[200pt]{\normalfont 张三}} \\ 
         \bfseries 学\quad\quad 号： & \underline{\makebox[200pt]{\normalfont 9211000000}} \\ 
         \bfseries 学\quad\quad 院： & \underline{\makebox[200pt]{\normalfont 自动化学院}} \\ 
@@ -81,12 +74,6 @@
     {\zihao{3} 2026 年 4 月 \par}
 \end{titlepage}
 
-\cleardoublepage
-\pagenumbering{Roman} 
-\chapter*{中文摘要}
-摘要内容...
-
-\end{document}
 % =========================================================
 % 摘要部分
 % =========================================================
@@ -94,7 +81,7 @@
 \pagenumbering{Roman} 
 
 \chapter*{中文摘要}
-摘要内容（100 ~ 200 字，小四号宋体，1.5 倍行距）：本项目针对风力发电系统进行了详细建模，利用叶素-动量理论分析了风轮的空气动力特性。通过仿真实验，验证了最大功率点跟踪控制算法的有效性，为风电场的有功功率控制提供了理论依据。
+摘要内容（100 ~ 200 字，小四号宋体，1.5 倍行距）：本项目针对风力发电系统进行了详细建模，利用叶素-动量理论分析了风轮的空气动力特性。通过仿真实验，验证了最大功率点跟踪控制算法的有效性。
 
 \vspace{2cm}
 \noindent \textbf{关键词：} 风力发电，叶素-动量理论，最大功率跟踪，建模仿真
@@ -102,7 +89,7 @@
 \cleardoublepage
 \chapter*{Abstract}
 \textbf{Title: Modeling and Simulation of Wind Power System} \par
-Abstract (Times New Roman, 1.5 spacing): This project focuses on the modeling and simulation of wind power generation systems. By applying Blade Element Momentum theory, the aerodynamic performance of the turbine is analyzed...
+Abstract (Times New Roman, 1.5 spacing): This project focuses on the modeling and simulation of wind power generation systems...
 
 \vspace{2cm}
 \noindent \textbf{Keywords:} Wind Power, BEM Theory, MPPT, Modeling and Simulation
@@ -182,4 +169,4 @@ Abstract (Times New Roman, 1.5 spacing): This project focuses on the modeling an
 \addcontentsline{toc}{chapter}{附录 A}
 这里可以放置 Matlab/Simulink 的仿真模型图或核心代码。
 
-\end{document}
+\end{document} % 全文仅此一个 end
