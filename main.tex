@@ -1,0 +1,185 @@
+% !TEX program = xelatex
+\documentclass[12pt, a4paper, twoside, openany]{report}
+
+% --- 1. 宏包加载与基础配置 ---
+\usepackage{ctex}       
+\usepackage{amsmath}    
+\usepackage{graphicx}   
+\usepackage{booktabs}   
+\usepackage{geometry}   
+\usepackage{fancyhdr}   
+\usepackage{titlesec}   
+\usepackage{setspace}   
+\usepackage{caption}    
+\usepackage{float}      
+\usepackage{hyperref}   
+\usepackage{fix-cm}     
+
+% --- 2. 字体与行距 ---
+\setCJKmainfont{SimSun}[AutoFakeBold=true] 
+\setmainfont{Times New Roman}              
+\setstretch{1.5}                           
+\setlength{\headheight}{15pt}              
+
+% 自定义 48 磅字号 (对应你要求的“课程设计说明书”字号)
+\newcommand{\sizefortyeight}{\fontsize{48pt}{\baselineskip}\selectfont}
+
+% --- 3. 章节标题样式定制 ---
+\titleformat{\chapter}[block]
+  {\centering\zihao{-3}\bfseries\sffamily}
+  {\thechapter}
+  {1em}
+  {}
+\titlespacing{\chapter}{0pt}{*0.5}{*0.5}
+
+% --- 5. 页眉页脚配置 ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage} 
+\fancyhead[RE]{南京理工大学课程设计} 
+\fancyhead[LO]{风力发电系统建模与仿真}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% --- 正文内容开始 ---
+\begin{document}
+
+% =========================================================
+% 修改后的封面部分
+% =========================================================
+% =========================================================
+% 修改后的封面部分
+% =========================================================
+\begin{titlepage}
+    \centering
+    \vspace*{1cm}
+    
+    % 1. 南京理工大学 Logo
+    % \includegraphics[width=0.8\textwidth]{njust_logo.png} \par
+    
+    \vspace{1.5cm}
+    
+    % 2. 课程设计说明书 (宋体 48磅)
+    {\fontsize{48pt}{60pt}\selectfont 课程设计说明书 \par}
+    
+    \vspace{3cm}
+    
+    % 3. 姓名学号等
+    % 外部统一设为三号字 (\zihao{3})
+    {\zihao{3} 
+    \begin{tabular}{l c} % l 为左对齐标签，c 为居中内容
+        % \bfseries 仅作用于标签部分，内容部分用 \normalfont 恢复不加粗状态
+        \bfseries 姓\quad\quad 名： & \underline{\makebox[200pt]{\normalfont 张三}} \\ 
+        \bfseries 学\quad\quad 号： & \underline{\makebox[200pt]{\normalfont 9211000000}} \\ 
+        \bfseries 学\quad\quad 院： & \underline{\makebox[200pt]{\normalfont 自动化学院}} \\ 
+        \bfseries 专业（方向）： & \underline{\makebox[200pt]{\normalfont 风力发电及其自动化}} \\ 
+        \bfseries 班\quad\quad 级： & \underline{\makebox[200pt]{\normalfont 2101班}} \\ 
+        \bfseries 课程名称： & \underline{\makebox[200pt]{\normalfont 风力发电系统建模与仿真}} \\ 
+        \bfseries 指导教师： & \underline{\makebox[200pt]{\normalfont 李老师}} \\ 
+    \end{tabular} \par}
+    
+    \vfill
+    {\zihao{3} 2026 年 4 月 \par}
+\end{titlepage}
+
+\cleardoublepage
+\pagenumbering{Roman} 
+\chapter*{中文摘要}
+摘要内容...
+
+\end{document}
+% =========================================================
+% 摘要部分
+% =========================================================
+\cleardoublepage
+\pagenumbering{Roman} 
+
+\chapter*{中文摘要}
+摘要内容（100 ~ 200 字，小四号宋体，1.5 倍行距）：本项目针对风力发电系统进行了详细建模，利用叶素-动量理论分析了风轮的空气动力特性。通过仿真实验，验证了最大功率点跟踪控制算法的有效性，为风电场的有功功率控制提供了理论依据。
+
+\vspace{2cm}
+\noindent \textbf{关键词：} 风力发电，叶素-动量理论，最大功率跟踪，建模仿真
+
+\cleardoublepage
+\chapter*{Abstract}
+\textbf{Title: Modeling and Simulation of Wind Power System} \par
+Abstract (Times New Roman, 1.5 spacing): This project focuses on the modeling and simulation of wind power generation systems. By applying Blade Element Momentum theory, the aerodynamic performance of the turbine is analyzed...
+
+\vspace{2cm}
+\noindent \textbf{Keywords:} Wind Power, BEM Theory, MPPT, Modeling and Simulation
+
+% =========================================================
+% 目录部分
+% =========================================================
+\cleardoublepage
+\pagestyle{plain} 
+\renewcommand{\contentsname}{目\quad 次} 
+\tableofcontents 
+\cleardoublepage 
+
+% =========================================================
+% 正文部分
+% =========================================================
+\pagenumbering{arabic} 
+\pagestyle{fancy}      
+
+\chapter{背景和意义}
+风力发电作为一种清洁、可再生的能源形式，近年来得到了飞速的发展。建立准确的风力机数学模型，是进行控制系统设计和稳定性分析的基础。
+
+\chapter{基于叶素-动量理论的风力机气动分析}
+\section{叶素理论基础}
+\subsection{气动力计算模型}
+正文引用文献示例：根据文献 [1] 的研究，风力机叶片的受力可分解为升力和阻力。
+
+物理量符号采用斜体，如速度 $v$、密度 $\rho$；单位符号采用正体，如 m/s。
+
+\begin{figure}[H]
+    \centering
+    \fbox{此处插入叶片受力分析矢量图} 
+    \caption{风力机叶片气动受力分析}
+    \label{fig:example}
+\end{figure}
+
+如图 \ref{fig:example} 所示，插图应采用矢量图以保证清晰度。图中文字为五号宋体。
+
+\section{数据统计与对比}
+表 \ref{tab:example} 展示了实验数据对比。
+
+\begin{table}[H]
+    \centering
+    \zihao{5} 
+    \caption{零点位置对比数据表}
+    \label{tab:example}
+    \begin{tabular}{lcccc}
+        \toprule
+        零点位置 & Walters 方法 & Darwell 方法 & Beromov 方法 & 实验数据 \\
+        \midrule
+        第 1 零点 & 1.95 & 1.95 & 2.37 & / \\
+        第 2 零点 & 4.77 & 4.80 & 5.28 & / \\
+        第 3 零点 & 9.07 & 9.13 & 9.57 & 9.17 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\chapter{风电机组最大功率点跟踪控制}
+正文内容（小四号宋体，1.5 倍行距，西文 Times New Roman）。
+
+\chapter{结论}
+通过对风力发电系统的建模与仿真，本课题得出了以下结论...
+
+% =========================================================
+% 参考文献与附录
+% =========================================================
+\cleardoublepage
+\chapter*{参考文献}
+\addcontentsline{toc}{chapter}{参考文献}
+\begin{spacing}{1.2} 
+[1] 刘谋佶, 吕志咏, 丘成昊, 等. 边条翼与旋涡分离流[M]. 北京: 北京航空学院出版社, 1988. 24-27. \par
+[2] 傅惠民. 二项分布参数整体推断方法[J]. 航空学报, 2000, 21（2）: 155-158. \par
+\end{spacing}
+
+\cleardoublepage
+\chapter*{附录 A}
+\addcontentsline{toc}{chapter}{附录 A}
+这里可以放置 Matlab/Simulink 的仿真模型图或核心代码。
+
+\end{document}
