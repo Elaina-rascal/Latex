@@ -1,0 +1,36 @@
+% 封面文件：只负责封面排版结构。
+% 具体人名、学号、专业等内容可以直接替换表格右侧内容。
+
+\begin{titlepage}
+    % 整页居中排版
+    \centering
+    % 封面顶部留白，避免视觉过满
+    \vspace*{1cm}
+
+    % 校徽或学校 Logo
+    \includegraphics[width=0.8\textwidth]{njust_logo.png}\par
+    \vspace{1.5cm}
+
+    % 封面主标题
+    {\fontsize{48pt}{60pt}\selectfont\bfseries 课程设计说明书\par}
+    \vspace{3cm}
+
+    % 信息栏：左侧是字段名，右侧是填写内容
+    {\zihao{3}
+    % 固定字段宽度，保证左侧对齐整齐
+    \newcommand{\coverfield}[1]{\makebox[6em][s]{\bfseries #1}}
+    \begin{tabular}{l l}
+        % 下面每行对应封面的一项信息
+        \coverfield{姓\hfill 名} & \underline{\makebox[220pt]{张三}} \\ [1.5ex]
+        \coverfield{学\hfill 号} & \underline{\makebox[220pt]{9211000000}} \\ [1.5ex]
+        \coverfield{学\hfill 院} & \underline{\makebox[220pt]{自动化学院}} \\ [1.5ex]
+        \coverfield{专\hfill 业\hfill (\hfill 方\hfill 向\hfill )} & \underline{\makebox[220pt]{风力发电及其自动化}} \\ [1.5ex]
+        \coverfield{班\hfill 级} & \underline{\makebox[220pt]{2101班}} \\ [1.5ex]
+        \coverfield{课\hfill 程\hfill 名\hfill 称} & \underline{\makebox[220pt]{风力发电系统建模与仿真}} \\ [1.5ex]
+        \coverfield{指\hfill 导\hfill 教\hfill 师} & \underline{\makebox[220pt]{李老师}} \\
+    \end{tabular}\par}
+
+    % 封面底部日期
+    \vfill
+    {\zihao{3}\bfseries 2026 年 4 月\par}
+\end{titlepage}

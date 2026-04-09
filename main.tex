@@ -1,237 +1,30 @@
 % !TEX program = xelatex
-\documentclass[12pt, a4paper, twoside, openany]{report}
+\documentclass[12pt,a4paper,twoside,openany]{report}
 
-% --- 1. 宏包加载 ---
-\usepackage{ctex}       
-\usepackage{amsmath}    
-\usepackage{graphicx}   
-\usepackage{booktabs}   
-\usepackage{geometry}   
-\usepackage{fancyhdr}   
-\usepackage{titlesec}   
-\usepackage{setspace}   
-\usepackage{caption}    
-\usepackage{float}      
-\usepackage{hyperref}   
-\usepackage{titletoc}   
-\usepackage{emptypage}  % 核心修改：确保完全空白的页面不显示页眉页脚
-\usepackage[most]{tcolorbox} % 用于绘制边框
-% --- 2. 页面与字体配置 ---
-\geometry{left=3.18cm, right=3.18cm, top=2.54cm, bottom=2.54cm} 
-\setCJKmainfont{SimSun}[AutoFakeBold=true] 
-\setmainfont{Times New Roman}
-\setstretch{1.5} 
-\setlength{\headheight}{15pt}
+\input{parts/style}
+\input{parts/header}
 
+\newcommand{\ChineseAbstractText}{本文围绕风力发电系统的建模与仿真展开，给出课程设计的总体思路、主要方法与结果总结。通过对风力机气动特性、发电机模型以及控制策略进行整理，可形成一套结构清晰、便于复用的课程设计说明书模板。}
+\newcommand{\ChineseAbstractKeywords}{风力发电；建模；仿真；课程设计}
+\newcommand{\EnglishAbstractText}{This report presents a concise template for the modeling and simulation of a wind power generation system. It organizes the major workflow, key equations, and writing structure so that the document can be reused as a minimal coursework example.}
+\newcommand{\EnglishAbstractKeywords}{wind power generation; modeling; simulation; coursework}
 
-% --- 核心字体配置：强制覆盖 ctex 的默认设置 ---
-\setCJKmainfont{SimSun}[AutoFakeBold=2.5] 
-\setCJKsansfont{SimHei}[AutoFakeBold=2.5]
-\setmainfont{Times New Roman}
-
-% 重点：必须显式重新定义 ctex 内部调用的 zhsong 和 zhhei 族
-\setCJKfamilyfont{zhsong}{SimSun}[AutoFakeBold=2.5]
-\setCJKfamilyfont{zhhei}{SimHei}[AutoFakeBold=2.5]
-
-% 确保执行 \songti 或 \heiti 时调用的是上面带有伪粗体定义的家族
-\renewcommand{\songti}{\CJKfamily{zhsong}}
-\renewcommand{\heiti}{\CJKfamily{zhhei}}
-% --- 3. 章节标题样式定制 (严格匹配docx要求) ---
-% 一级标题：小三号黑体
-\titleformat{\chapter}[block]
-  {\centering\zihao{-3}\bfseries\heiti}
-  {\thechapter}
-  {1em}
-  {}
-\titlespacing*{\chapter}{0pt}{-1.5\baselineskip}{0.5\baselineskip}
-
-% 二级标题：四号黑体
-\titleformat{\section}[block]
-  {\zihao{4}\bfseries\heiti}
-  {\thesection}
-  {1em}
-  {}
-
-% 三级标题：小四号黑体
-\titleformat{\subsection}[block]
-  {\zihao{-4}\bfseries\heiti}
-  {\thesubsection}
-  {1em}
-  {}
-
-% --- 目录格式定制 ---
-\titlecontents{chapter}[0pt] % 左对齐
-{\addvspace{6pt}\zihao{-4}\songti} % 小四宋体，适当增加行间距以接近18磅
-{\thecontentslabel\quad} % 有编号的情况：如 "1 背景"
-{} % 无编号的情况：如 "结论"（也会从0pt开始，实现左对齐）
-{\titlerule*[5pt]{.}\thecontentspage}
-% 2. 二级标题（节）
-\titlecontents{section}[0pt] % 同样设为 0pt，确保编号与一级标题纵向对齐
-{\addvspace{3pt}\zihao{-4}\songti}
-{\thecontentslabel\quad} % 显示如 "2.1 标题内容"
-{}
-{\titlerule*[5pt]{.}\thecontentspage}
-% 屏蔽三级标题（如果不小心在正文写了subsection，也不会出现在目录里）
-\setcounter{tocdepth}{1}
-
-% --- 5. 图表标题定制 (五号黑体，居中) ---
-\DeclareCaptionFont{five}{\zihao{5}\bfseries\heiti}
-\captionsetup{font=five, labelsep=space} 
-
-% --- 6. 页眉页脚配置 (只保留页眉) ---
-\pagestyle{fancy}
-\fancyhf{} 
-\fancyhead[LE,RO]{\thepage} % 页码放在页眉外侧
-\fancyhead[RE,LO]{南京理工大学课程设计说明书}
-\fancyfoot{} % 确保页脚为空
-\renewcommand{\headrulewidth}{0.4pt}
-
-% 修正 report 类在 chapter 第一页强制使用 plain 样式的问题
-\fancypagestyle{plain}{
-  \fancyhf{}
-  \fancyhead[LE,RO]{\thepage}
-  \fancyhead[RE,LO]{南京理工大学课程设计说明书}
-  \fancyfoot{}
-  \renewcommand{\headrulewidth}{0.4pt}
-}
-
-% --- 正文内容开始 ---
 \begin{document}
+\input{parts/cover}
+\input{parts/abstract}
+\input{parts/toc}
 
-% =========================================================
-% 封面部分
-% =========================================================
-% --- 封面开始 ---
-\begin{titlepage}
-    \centering
-    \vspace*{1cm}
-    
-    % 1. Logo
-    \includegraphics[width=0.8\textwidth]{njust_logo.png} \par
-    \vspace{1.5cm}
-    
-    % 2. 标题
-    {\fontsize{48pt}{60pt}\selectfont\bfseries 课程设计说明书 \par}
-    \vspace{3cm}
-    
-    % 3. 信息栏
-    {\zihao{3} 
-    % 定义标签盒子：宽度 6em，内容两端对齐 [s]
-    \newcommand{\myfield}[1]{\makebox[6em][s]{\bfseries #1}} 
-    
-    \begin{tabular}{l l} 
-        % 每一个字之间都加 \hfill，保证 LaTeX 能平分间距撑满 6em
-        \myfield{姓\hfill 名} & \underline{\makebox[220pt]{张三}} \\ [1.5ex] 
-        \myfield{学\hfill 号} & \underline{\makebox[220pt]{9211000000}} \\ [1.5ex]
-        \myfield{学\hfill 院} & \underline{\makebox[220pt]{自动化学院}} \\ [1.5ex]
-        % 特别注意：专业(方向)这种带标点的，标点前后也要加
-        \myfield{专\hfill 业\hfill (\hfill 方\hfill 向\hfill )} & \underline{\makebox[220pt]{风力发电及其自动化}} \\ [1.5ex]
-        \myfield{班\hfill 级} & \underline{\makebox[220pt]{2101班}} \\ [1.5ex]
-        \myfield{课\hfill 程\hfill 名\hfill 称} & \underline{\makebox[220pt]{风力发电系统建模与仿真}} \\ [1.5ex]
-        \myfield{指\hfill 导\hfill 教\hfill 师} & \underline{\makebox[220pt]{李老师}} \\
-    \end{tabular} \par}
-    
-    \vfill
-    {\zihao{3}\bfseries 2026 年 4 月 \par}
-\end{titlepage}
-% =========================================================
-% 摘要与目录 (页眉页码用罗马数字)
-% =========================================================
 \cleardoublepage
-\pagenumbering{Roman} 
-\begin{center}
-        {\zihao{-3}\songti\bfseries 中文摘要} 
-    \end{center}
-% 1. 标题：中文摘要 (三号黑体，居中)
-\begin{tcolorbox}[
-    enhanced,
-    sharp corners,        % 直角
-    colback=white,        % 背景白色
-    colframe=black,       % 边框黑色
-    width=\textwidth,     % 宽度
-    height fill,          % 关键：自动填满页面剩余高度
-    boxrule=0.5pt,        % 边框粗细
-    left=1.5em, right=1.5em, 
-    top=1em, bottom=1em,
-    before skip=0pt,      % 去除框前间距
-    after skip=0pt        % 去除框后间距
-]
-    % 1. 将“中文摘要”标题移入框内顶部居中
-    
-
-    % 2. 标题后空 1 行
-    \vspace{\baselineskip} 
-
-    % 3. 摘要内容 (小四宋体，1.5 倍行距)
-    \begin{spacing}{1.5}
-        \noindent {\zihao{-4}\songti\bfseries 摘要：} \\ 
-        {\zihao{-4}\songti 摘要内容（100 ~ 200 字，小四号宋体，1.5 倍行距）。这里是摘要的正文部分，紧跟在标题换行之后。} \par
-
-        % 4. 摘要正文与关键词之间空 2 行
-        \vspace{2\baselineskip} 
-
-        % 5. 关键词 (加粗宋体)
-        \noindent {\zihao{-4}\songti\bfseries 关键词：} 
-        {\zihao{-4}\songti 关键词1，关键词2，关键词3}
-    \end{spacing}
-\end{tcolorbox}
-\clearpage
-\begin{center}
-        {\zihao{-3}\songti\bfseries 英文摘要} 
-    \end{center}
-% 1. 标题：中文摘要 (三号黑体，居中)
-\begin{tcolorbox}[
-    enhanced,
-    sharp corners,        % 直角
-    colback=white,        % 背景白色
-    colframe=black,       % 边框黑色
-    width=\textwidth,     % 宽度
-    height fill,          % 关键：自动填满页面剩余高度
-    boxrule=0.5pt,        % 边框粗细
-    left=1.5em, right=1.5em, 
-    top=1em, bottom=1em,
-    before skip=0pt,      % 去除框前间距
-    after skip=0pt        % 去除框后间距
-]
-    % 1. 将“中文摘要”标题移入框内顶部居中
-    
-
-    % 2. 标题后空 1 行
-    \vspace{\baselineskip} 
-
-    % 3. 摘要内容 (小四宋体，1.5 倍行距)
-    \begin{spacing}{1.5}
-        \noindent {\zihao{-4}\bfseries Abstract：} \\ 
-        {\zihao{-4}\songti 摘要内容（100 ~ 200 字，小四号宋体，1.5 倍行距）。这里是摘要的正文部分，紧跟在标题换行之后。} \par
-
-        % 4. 摘要正文与关键词之间空 2 行
-        \vspace{2\baselineskip} 
-
-        % 5. 关键词 (加粗宋体)
-        \noindent \textbf{Keywords:} Keyword1, Keyword2, Keyword3
-
-        \noindent {\zihao{-4}\songti\bfseries 关键词：} 
-        {\zihao{-4}\songti 关键词1，关键词2，关键词3}
-    \end{spacing}
-\end{tcolorbox}
-
-% 目录生成
-\cleardoublepage
-\renewcommand{\contentsname}{目\quad 次}
-\tableofcontents 
-
-% 为双面打印留出偶数页，确保正文从奇数页开始
-\clearpage
-\ifodd\value{page}\else\thispagestyle{empty}\null\clearpage\fi
-
-% =========================================================
-% 正文部分 (页眉页码用阿拉伯数字)
-% =========================================================
-\cleardoublepage
-\pagenumbering{arabic} 
+\pagenumbering{arabic}
 
 \chapter{背景和意义}
 正文用小四号宋体，1.5 倍行距，西文字符使用 Times New Roman 字体。
+
+\section{研究目标}
+这里是二级标题示例。
+
+\subsection{实现思路}
+这里是三级标题示例。
 
 \chapter{基于叶素-动量理论的风力机气动分析}
 \section{叶素理论基础}
@@ -239,42 +32,32 @@
 正文中所有量的符号采用斜体，如速度 $v$、密度 $\rho$；所有单位符号采用正体，如 m/s。
 
 \begin{figure}[H]
-    \centering
-    \vspace{0.2cm}
-    \caption{风力机叶片气动受力分析图题}
-    \vspace{0.5\baselineskip} 
+	\centering
+	\vspace{0.2cm}
+	\caption{风力机叶片气动受力分析图题}
+	\vspace{0.5\baselineskip}
 \end{figure}
 
 \section{数据统计}
 \begin{table}[H]
-    \centering
-    \vspace{0.5\baselineskip} 
-    \caption{零点位置对比数据表题}
-    \zihao{5}\songti 
-    \begin{tabular}{lcccc}
-        \toprule
-        零点位置 & Walters 方法 & Darwell 方法 & Beromov 方法 & 实验数据 \\
-        \midrule
-        第 1 零点 & 1.95 & 1.95 & 2.37 & / \\
-        第 2 零点 & 4.77 & 4.80 & 5.28 & / \\
-        \bottomrule
-    \end{tabular}
+	\centering
+	\vspace{0.5\baselineskip}
+	\caption{零点位置对比数据表题}
+	\zihao{5}\songti
+	\begin{tabular}{lcccc}
+		\toprule
+		零点位置 & Walters 方法 & Darwell 方法 & Beromov 方法 & 实验数据 \\
+		\midrule
+		第 1 零点 & 1.95 & 1.95 & 2.37 & / \\
+		第 2 零点 & 4.77 & 4.80 & 5.28 & / \\
+		\bottomrule
+	\end{tabular}
 \end{table}
 
-{
-\titlespacing*{\chapter}{0pt}{0\baselineskip}{0.5\baselineskip} 
 \chapter{结论}
-}
 结论内容使用小四号宋体，1.5 倍行距。
 
-% =========================================================
-% 参考文献
-% =========================================================
-% \chapter*{参考文献}
-{
-\titlespacing*{\chapter}{0pt}{0\baselineskip}{0.5\baselineskip} 
 \chapter{参考文献}
-}
 \addcontentsline{toc}{chapter}{参考文献}
 {\zihao{-4} \setlength{\baselineskip}{18pt}
 [1] 刘谋佶, 吕志咏, 丘成昊, 等. 边条翼与旋涡分离流[M]. 北京: 北京航空学院出版社, 1988. 24-27. \par

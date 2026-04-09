@@ -1,0 +1,87 @@
+% 公共样式文件：只放宏包、页面、字体、标题和目录规则。
+% 具体正文内容应放在 main.tex 或单独的内容块里。
+
+\usepackage{ctex}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+% 页面尺寸和页眉页脚控制
+\usepackage{geometry}
+\usepackage{fancyhdr}
+% 章节标题与目录格式控制
+\usepackage{titlesec}
+\usepackage{setspace}
+\usepackage{caption}
+% 浮动体和超链接支持
+\usepackage{float}
+\usepackage{hyperref}
+% 目录条目排版控制
+\usepackage{titletoc}
+% 空白页保持真正空白
+\usepackage{emptypage}
+% 带边框内容块
+\usepackage[most]{tcolorbox}
+
+% 按课程设计常见要求设置页边距
+\geometry{left=3.18cm,right=3.18cm,top=2.54cm,bottom=2.54cm}
+% 页眉高度留足，避免 fancyhdr 警告
+\setlength{\headheight}{15pt}
+% 正文统一使用 1.5 倍行距
+\setstretch{1.5}
+
+% 字体定义：中文宋体/黑体，西文 Times New Roman
+\setCJKmainfont{SimSun}[AutoFakeBold=2.5]
+\setCJKsansfont{SimHei}[AutoFakeBold=2.5]
+\setmainfont{Times New Roman}
+\setCJKfamilyfont{zhsong}{SimSun}[AutoFakeBold=2.5]
+\setCJKfamilyfont{zhhei}{SimHei}[AutoFakeBold=2.5]
+\renewcommand{\songti}{\CJKfamily{zhsong}}
+\renewcommand{\heiti}{\CJKfamily{zhhei}}
+
+% 一级标题：章，居中大号黑体
+\titleformat{\chapter}[block]
+  {\centering\zihao{-3}\bfseries\heiti}
+  {\thechapter}
+  {1em}
+  {}
+% 章标题和正文之间的间距
+\titlespacing*{\chapter}{0pt}{-1.5\baselineskip}{0.5\baselineskip}
+
+% 二级标题：节，四号黑体
+\titleformat{\section}[block]
+  {\zihao{4}\bfseries\heiti}
+  {\thesection}
+  {1em}
+  {}
+
+% 三级标题：小节，小四黑体
+\titleformat{\subsection}[block]
+  {\zihao{-4}\bfseries\heiti}
+  {\thesubsection}
+  {1em}
+  {}
+
+% 目录中章条目样式
+\titlecontents{chapter}[0pt]
+{\addvspace{6pt}\zihao{-4}\songti}
+{\thecontentslabel\quad}
+{}
+{\titlerule*[5pt]{.}\thecontentspage}
+% 目录中节条目样式
+\titlecontents{section}[0pt]
+{\addvspace{3pt}\zihao{-4}\songti}
+{\thecontentslabel\quad}
+{}
+{\titlerule*[5pt]{.}\thecontentspage}
+% 目录中小节条目样式
+\titlecontents{subsection}[2em]
+{\addvspace{2pt}\zihao{-4}\songti}
+{\thecontentslabel\quad}
+{}
+{\titlerule*[5pt]{.}\thecontentspage}
+% 目录深度控制到小节
+\setcounter{tocdepth}{2}
+
+% 图表标题格式
+\DeclareCaptionFont{five}{\zihao{5}\bfseries\heiti}
+\captionsetup{font=five,labelsep=space}

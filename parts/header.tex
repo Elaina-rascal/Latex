@@ -1,0 +1,22 @@
+% 页眉文件：只控制每页顶部显示内容。
+% 正文、封面和摘要的实际内容不写在这里。
+
+% 默认页眉页脚样式：页脚清空，只保留页眉
+\pagestyle{fancy}
+\fancyhf{}
+% 外侧页眉放页码，适合双面打印
+\fancyhead[LE,RO]{\thepage}
+% 内侧页眉放课程设计名称
+\fancyhead[RE,LO]{南京理工大学课程设计说明书}
+\fancyfoot{}
+% 页眉线保留细线，强化分页感
+\renewcommand{\headrulewidth}{0.4pt}
+
+% report 类的 chapter 首页默认会用 plain，这里统一成同样的页眉格式
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \fancyhead[LE,RO]{\thepage}
+  \fancyhead[RE,LO]{南京理工大学课程设计说明书}
+  \fancyfoot{}
+  \renewcommand{\headrulewidth}{0.4pt}
+}

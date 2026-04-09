@@ -1,0 +1,12 @@
+% 目录文件：只负责目录的生成位置和分页方式。
+% 目录条目来源于正文章节标题，不在这里手工写入。
+
+% 目录从新页开始，和摘要区分开
+\cleardoublepage
+% 目录标题名，保留中文间距效果
+\renewcommand{\contentsname}{目	\quad 次}
+% 自动生成目录
+\tableofcontents
+% 目录后换页，必要时补空白页，保证双面打印版式
+\clearpage
+\ifodd\value{page}\else\thispagestyle{empty}\null\clearpage\fi

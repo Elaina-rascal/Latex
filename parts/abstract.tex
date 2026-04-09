@@ -1,0 +1,77 @@
+% 摘要文件：只负责摘要页面的版式。
+% 摘要的具体文字内容由 main.tex 里的宏提供，方便集中修改。
+
+% 前置部分单独起页，并切换为罗马页码
+\cleardoublepage
+\pagenumbering{Roman}
+
+% 中文摘要标题
+\begin{center}
+    {\zihao{-3}\songti\bfseries 中文摘要}
+\end{center}
+
+% 中文摘要主体框
+\begin{tcolorbox}[
+    enhanced,
+    sharp corners,
+    colback=white,
+    colframe=black,
+    width=\textwidth,
+    height fill,
+    boxrule=0.5pt,
+    left=1.5em, right=1.5em,
+    top=1em, bottom=1em,
+    before skip=0pt,
+    after skip=0pt
+]
+    % 摘要正文采用 1.5 倍行距
+    \begin{spacing}{1.5}
+        % 摘要标签固定，正文内容来自主文件定义的宏
+        \noindent {\zihao{-4}\songti\bfseries 摘要：}
+        {\zihao{-4}\songti \ChineseAbstractText}
+
+        % 摘要与关键词之间保留空白
+        \vspace{2\baselineskip}
+
+        % 关键词行
+        \noindent {\zihao{-4}\songti\bfseries 关键词：}
+        {\zihao{-4}\songti \ChineseAbstractKeywords}
+    \end{spacing}
+\end{tcolorbox}
+
+% 英文摘要单独分页
+\clearpage
+
+% 英文摘要标题
+\begin{center}
+    {\zihao{-3}\songti\bfseries English Abstract}
+\end{center}
+
+% 英文摘要主体框
+\begin{tcolorbox}[
+    enhanced,
+    sharp corners,
+    colback=white,
+    colframe=black,
+    width=\textwidth,
+    height fill,
+    boxrule=0.5pt,
+    left=1.5em, right=1.5em,
+    top=1em, bottom=1em,
+    before skip=0pt,
+    after skip=0pt
+]
+    \begin{spacing}{1.5}
+        % 英文摘要正文
+        \noindent {\zihao{-4}\bfseries Abstract:}
+        {\zihao{-4}\songti \EnglishAbstractText}
+
+        % 英文关键词
+        \vspace{2\baselineskip}
+
+        \noindent \textbf{Keywords:} \EnglishAbstractKeywords
+    \end{spacing}
+\end{tcolorbox}
+
+% 摘要结束后换页，后面接目录
+\clearpage
