@@ -1,0 +1,28 @@
+{
+    // 1. 指定输出目录（只改这一行其实就能生效）
+    "latex-workshop.latex.outDir": "temp",
+    // 2. 简化编译工具链：直接使用 latexmk
+    // latexmk 会自动处理多次编译和子目录问题，比手动配置 xelatex 更稳
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latexmk (xelatex)",
+            "tools": [
+                "latexmk_xe"
+            ]
+        }
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk_xe",
+            "command": "latexmk",
+            "args": [
+                "-xelatex",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-outdir=%OUTDIR%", // 关键：告诉 latexmk 输出到 temp
+                "%DOC%"
+            ]
+        }
+    ]
+}
