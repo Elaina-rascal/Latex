@@ -1,0 +1,125 @@
+\documentclass[11pt, a4paper]{article}
+
+% ----- 宏包加载 -----
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[fontset=windows]{ctex} 
+\usepackage{fontawesome5} 
+\usepackage{geometry} 
+\usepackage{enumitem} 
+\usepackage{titlesec} 
+\usepackage{xcolor} 
+\usepackage{hyperref}
+\usepackage{graphicx} % 必须添加这个宏包才能显示图片
+% ----- 字体设置 -----
+\setmainfont{Times New Roman}
+\setCJKmainfont{Microsoft YaHei}
+
+% ----- 页面设置 -----
+\geometry{left=1.2cm, right=1.2cm, top=1.0cm, bottom=1.0cm} % 稍微收缩上下边距
+\pagestyle{empty} 
+\setlength{\parindent}{0pt}
+
+% ----- 颜色定义 -----
+\definecolor{primary}{RGB}{44, 62, 80}
+
+% ----- 自定义标题样式（深度压缩间距） -----
+\titleformat{\section}{\large\bfseries\color{primary}}{}{0em}{}[\titlerule]
+\titlespacing*{\section}{0pt}{5pt}{3pt} % 进一步微调，腾出空间
+
+% ----- 简历开始 -----
+\begin{document}
+
+% --- 个人信息 ---
+\noindent
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l r @{}}
+    \begin{minipage}[b]{0.75\textwidth}
+        {\huge \bfseries 柳宣泽} \\[6pt]
+        \small
+        \faPhone* \ 13175857611 \quad
+        \faEnvelope \ \href{mailto:1463967532@qq.com}{1463967532@qq.com} \quad
+        \faMapMarker \ 籍贯：浙江台州
+    \end{minipage}
+    &
+    \begin{minipage}[b]{0.2\textwidth}
+        \raggedleft
+        % 稍微调小照片宽度以节省空间，固定高度防止撑开行间距
+        \includegraphics[width=1.5cm]{照片.png} 
+    \end{minipage}
+\end{tabular*}
+\vspace{-4pt} % 抵消 tabular 可能带来的多余间距
+
+% --- 教育背景 (完全保持原样) ---
+\section{\faGraduationCap \ 教育背景}
+\noindent % 确保不缩进
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l l r @{}}
+    \textbf{南京理工大学} & \textbf{自动化学院} & \textbf{智能电网专业（国家特色）} \\
+    \textbf{平均学分绩点：}85.5 & \textbf{成绩排名：1/40} & \textbf{外语能力：}CET4 (564) / CET6 (504) \\
+\end{tabular*}
+
+\vspace{2pt}
+
+\begin{itemize}[leftmargin=0em, label={}, nosep, topsep=0pt]
+    \item \textbf{主修课程：} C 语言程序设计 (93) \hfill 模拟电子线路 (90) \hfill 数字电子线路 (95) \hfill 控制工程基础 (87)
+    \item \phantom{\textbf{主修课程：}} 智能电网信息技术 (92) \hfill 高等数学 1 (87) \hfill 高等数学 2 (88) \hfill 人工智能基础 (89)
+    \vspace{2pt}
+    \item \textbf{学习获奖：} \textbf{国家奖学金}、专业特等奖学金（两次）
+\end{itemize}
+
+% --- 科研经历 (内容完全保留) ---
+\section{\faFlask \ 科研经历}
+
+\textbf{基于 SLAM 码盘融合的机器人高频定位系统研发} \hfill \textbf{24.09-25.04} \ $\rightarrow$ \ \textbf{第一负责人} \\
+{\kaishu 项目简介：针对 ROBOCON 赛场下的定位需求开发 SLAM 轮式里程计激光融合定位算法}
+\begin{itemize}[leftmargin=1.5em, noitemsep, topsep=1pt]
+    \item \textbf{负责工作：} 1. 完成 \textbf{point\_lio voxel\_slam fast\_lio} 算法的复现，雷达驱动的适配与 \textbf{docker} 环境封装
+    \item 2. 通过\textbf{插值算法}实现\textbf{正交里程计 SLAM 的多传感器紧耦合定位}，采用 \textbf{map->odom} 坐标表示码盘偏移
+    \item 3. 基于点激光传感器完成 SLAM \textbf{初始位置的纠正算法}，纠正后误差从 10-20cm 降到 \textbf{2cm} 内
+    \item 4. 设计\textbf{多容器ROS2+ROS1}上位机框架，通过ros-bridge实现ros2与ros1算法的话题对接
+    \item \textbf{项目成果：robocon2025 年全国二等奖}
+\end{itemize}
+
+\vspace{3pt}
+\textbf{MPC 机器人底盘运动控制} \hfill \textbf{26.03-26.04} \ $\rightarrow$ \ \textbf{第一负责人} \\
+{\kaishu 项目简介：面向 ROBOCON 高速机动赛场，完成舵轮底盘速度级 MPC 轨迹跟踪控制器 design 与仿真闭环验证}
+\begin{itemize}[leftmargin=1.5em, noitemsep, topsep=1pt]
+    \item \textbf{负责工作：} 1. 搭建 \textbf{MuJoCo + ROS2} 舵轮仿真链路，完成比赛地图构建、车体质量/转动惯量配置、关节响应时间调优
+    \item 2. 基于 \textbf{do-mpc + CasADi} 实现速度级 MPC 控制器（状态 $[x,y,\theta]$，舵轮控制 $[v,\alpha,\omega_z]$），配置代价函数与约束
+    \item 3. 设计 \textbf{三次样条路径规划器}，实现\textbf{移动参考点生成与时变参考轨迹更新}，支持高曲率复杂路径的光滑跟踪
+    \item 4. 设计 \textbf{ros2+async} 上位机控制框架，并将 MPC 控制器集成到 ROBOCON 比赛框架中
+\end{itemize}
+
+\vspace{3pt}
+\textbf{MPPT 最大功率点跟踪控制(指导老师:殷明慧)} \hfill \textbf{25.09-26.04} \ $\rightarrow$ \ \textbf{第一负责人} \\
+{\kaishu 项目简介：针对风力发电 MPPT 最优转矩法在面对湍流时跟踪失效问题进行改良}
+\begin{itemize}[leftmargin=1.5em, noitemsep, topsep=1pt]
+    \item \textbf{负责工作：} 1. 通过搜集文献查找主流的方案有\textbf{最优转矩，爬山法与叶尖速比法}
+    \item 2. 在 \textbf{simulink} 仿真中搭建风电系统模型并验证了传统最优转矩法在面对大湍流时出现跟踪失效问题
+    \item 3. 分析跟踪失效原因为电机转速变化慢导致叶尖速比失速，提出\textbf{PI法}与\textbf{更改最优转矩曲线法}解决失效问题
+    \item \textbf{项目成果：} 完成实验平台效果验证，在大湍流下实现\textbf{多 30\% 风能捕获率}
+\end{itemize}
+
+% --- 获奖情况 (内容完全保留) ---
+\section{\faTrophy \ 获奖情况}
+\begin{itemize}[leftmargin=1.5em, nosep, topsep=2pt]
+    \item \makebox[0.45\textwidth][l]{\textbf{ROBOCON 颗粒归仓}} \makebox[0.35\textwidth][l]{\textbf{国家级一等奖}} \hfill \textbf{2024 年}
+    \item \makebox[0.45\textwidth][l]{\textbf{ROBOCON 飞身上篮}} \makebox[0.35\textwidth][l]{\textbf{国家级二等奖}} \hfill \textbf{2025 年}
+    \item \makebox[0.45\textwidth][l]{\textbf{中国工程机器人大赛智慧物流}} \makebox[0.35\textwidth][l]{\textbf{国家级亚军}} \hfill \textbf{2025 年}
+    \item \makebox[0.45\textwidth][l]{\textbf{中国机器人技能大赛单项赛道}} \makebox[0.35\textwidth][l]{\textbf{国家级冠军}} \hfill \textbf{2024 年}
+\end{itemize}
+
+% --- 实践经历 (内容完全保留) ---
+\section{\faBriefcase \ 实践经历}
+\begin{itemize}[leftmargin=1.5em, nosep, topsep=2pt]
+    \item \textbf{南京理工大学 up70 战队核心队员} \hfill \textbf{2023.12-2024.06}
+    \item \textbf{南京理工大学 up70 战队算法组组长} \hfill \textbf{2024.09-现在} 
+\end{itemize}
+
+% --- 个人评价 (内容完全保留) ---
+\section{\faUserCheck \ 个人评价}
+\begin{itemize}[leftmargin=1.5em, nosep, topsep=2pt]
+    \item \textbf{熟悉 STM32 开发, vscode, keil, cmake 工具链，能使用 c/c++ 混合编程}
+    \item \textbf{熟悉 ROS，git，docker，有大型项目开发经历}
+\end{itemize}
+
+\end{document}
