@@ -40,7 +40,7 @@
     {\huge \bfseries 柳宣泽} \\ \vspace{6pt}
     \small
     \faPhone* \ 13175857611 \quad
-    \faEnvelope \ \href{mailto:1463967532@qq.com}{1463967532@qq.com} \quad
+    \faEnvelope \ 1463967532@qq.com \quad
     \faMapMarker \ 籍贯：浙江台州 
 \end{center}
 
@@ -76,10 +76,10 @@
 
 \vspace{3pt}
 \textbf{MPC 机器人底盘运动控制} \hfill \textbf{26.03-26.04} \ $\rightarrow$ \ \textbf{第一负责人} \\
-{\kaishu 项目简介：面向 ROBOCON 高速机动赛场，完成舵轮底盘速度级 MPC 轨迹跟踪控制器 design 与仿真闭环验证}
+{\kaishu 项目简介：面向 ROBOCON 高速机动赛场，完成舵轮底盘 MPC 轨迹跟踪控制}
 \begin{itemize}[leftmargin=1.5em, noitemsep, topsep=1pt]
-    \item \textbf{负责工作：} 1. 搭建 \textbf{MuJoCo + ROS2} 舵轮仿真链路，完成比赛地图构建、车体质量/转动惯量配置、关节响应时间调优
-    \item 2. 基于 \textbf{do-mpc + CasADi} 实现速度级 MPC 控制器（状态 $[x,y,\theta]$，舵轮控制 $[v,\alpha,\omega_z]$），配置代价函数与约束
+    \item \textbf{负责工作：} 1. 搭建 \textbf{MuJoCo + ROS2} 舵轮仿真链路，完成比赛地图构建、车体质量/转动惯量配置、关节响应时间调整，让仿真更贴近实际表现。
+    \item 2. 基于 \textbf{do-mpc + CasADi} 实现 MPC 路径跟踪控制器（状态 $[x,y,\theta]$，舵轮控制 $[v,\alpha,\omega_z]$，模型输入$[vx,vy,omega]$）。配置位置软约束，输入软约束与最大速度硬约束。
     \item 3. 设计 \textbf{三次样条路径规划器}，实现\textbf{移动参考点生成与时变参考轨迹更新}，支持高曲率复杂路径的光滑跟踪
     \item 4. 设计 \textbf{ros2+async} 上位机控制框架，并将 MPC 控制器集成到 ROBOCON 比赛框架中
 \end{itemize}
