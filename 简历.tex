@@ -11,6 +11,7 @@
 \usepackage{xcolor} 
 \usepackage{hyperref}
 \usepackage{graphicx} % 必须添加这个宏包才能显示图片
+\usepackage[absolute,overlay]{textpos}
 % ----- 字体设置 -----
 \setmainfont{Times New Roman}
 \setCJKmainfont{Microsoft YaHei}
@@ -32,22 +33,16 @@
 
 % --- 个人信息 ---
 \noindent
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l r @{}}
-    \begin{minipage}[b]{0.75\textwidth}
-        {\huge \bfseries 柳宣泽} \\[6pt]
-        \small
-        \faPhone* \ 13175857611 \quad
-        \faEnvelope \ \href{mailto:1463967532@qq.com}{1463967532@qq.com} \quad
-        \faMapMarker \ 籍贯：浙江台州
-    \end{minipage}
-    &
-    \begin{minipage}[b]{0.2\textwidth}
-        \raggedleft
-        % 稍微调小照片宽度以节省空间，固定高度防止撑开行间距
-        \includegraphics[width=1.5cm]{照片.png} 
-    \end{minipage}
-\end{tabular*}
-\vspace{-4pt} % 抵消 tabular 可能带来的多余间距
+\begin{textblock*}{3cm}(16.2cm, 0.5cm) 
+    \includegraphics[width=2.1cm, height=2.7cm, keepaspectratio]{照片.png}
+\end{textblock*}
+\begin{center}
+    {\huge \bfseries 柳宣泽} \\ \vspace{6pt}
+    \small
+    \faPhone* \ 13175857611 \quad
+    \faEnvelope \ \href{mailto:1463967532@qq.com}{1463967532@qq.com} \quad
+    \faMapMarker \ 籍贯：浙江台州 
+\end{center}
 
 % --- 教育背景 (完全保持原样) ---
 \section{\faGraduationCap \ 教育背景}
