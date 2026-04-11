@@ -17,7 +17,7 @@
 \setCJKmainfont{Microsoft YaHei}
 
 % ----- 页面设置 -----
-\geometry{left=1.2cm, right=1.2cm, top=1.0cm, bottom=1.0cm} % 稍微收缩上下边距
+\geometry{left=1.2cm, right=1.2cm, top=1.0cm, bottom=0.8cm} % 稍微收缩上下边距
 \pagestyle{empty} 
 \setlength{\parindent}{0pt}
 
@@ -69,7 +69,7 @@
 \begin{itemize}[leftmargin=1.5em, noitemsep, topsep=1pt]
     \item \textbf{负责工作：} 1. 完成 \textbf{point\_lio voxel\_slam fast\_lio} 算法的复现，雷达驱动的适配与 \textbf{docker} 环境封装
     \item 2. 通过\textbf{插值算法}实现\textbf{正交里程计 SLAM 的多传感器紧耦合定位}，采用 \textbf{map->odom} 坐标表示码盘偏移
-    \item 3. 基于点激光传感器完成 SLAM \textbf{初始位置的纠正算法}，纠正后误差从 10-20cm 降到 \textbf{2cm} 内
+    \item 3. 基于点激光传感器完成 SLAM \textbf{初始位置的纠正算法}，纠正后因起始点导致的误差从 10-20cm 降到 \textbf{2cm} 内
     \item 4. 设计\textbf{多容器ROS2+ROS1}上位机框架，通过ros-bridge实现ros2与ros1算法的话题对接
     \item \textbf{项目成果：robocon2025 年全国二等奖}
 \end{itemize}
